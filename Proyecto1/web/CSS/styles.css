@@ -1,0 +1,314 @@
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    color: white;
+    padding-top: 80px;
+
+}
+
+
+header {
+    position: fixed;
+    top: 0;
+    left: 0; /* Asegura que empiece desde el borde izquierdo */
+    right: 0; /* Asegura que llegue al borde derecho */
+    width: 100vw; /* Usa el 100% del viewport width */
+    box-sizing: border-box; /* Incluye padding y border en el ancho total */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 20px;
+    background-color: black;
+    z-index: 1000;
+    border-bottom: 1px solid white;
+    margin: 0; /* Elimina márgenes por defecto */
+}
+
+.header-left, .header-right {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap; /* Los elementos se acomodan si no hay espacio */
+    gap: 10px;
+
+}
+
+/* Limita el tamaño de cada lado para evitar desbordes */
+.header-left {
+    flex: 1 1 60%; /* Permite que ocupe hasta 60% si es necesario */
+    min-width: 0;  /* Evita que crezca más de lo necesario */
+}
+
+.header-right {
+    flex: 1 1 40%;
+    justify-content: flex-end;
+    min-width: 0;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.user-session {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.user-name {
+    font-weight: bold;
+    color: white;
+}
+
+.cerrar-sesion {
+    background-color: #e74c3c;
+    color: white !important;
+    padding: 5px 10px;
+    border-radius: 4px;
+    transition: background-color 0.3s;
+}
+
+.cerrar-sesion:hover {
+    background-color: #c0392b;
+}
+.logo {
+    height: 50px;
+    margin-right: 20px;
+}
+
+nav a {
+    color: white;
+    text-decoration: none;
+    margin: 0 10px;
+    font-size: 14px!important;
+}
+
+.phone {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    color: white;
+    font-size: 16px;
+    margin-left: 20px;
+}
+
+.phone::before {
+    content: "";
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    background-image: url("data:image/svg+xml,%3Csvg fill='white' viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M6.62 10.79a15.91 15.91 0 006.59 6.59l2.2-2.2a1 1 0 011.11-.21 11.72 11.72 0 003.66.58 1 1 0 011 1v3.5a1 1 0 01-1 1A16 16 0 014 4a1 1 0 011-1h3.5a1 1 0 011 1 11.72 11.72 0 00.58 3.66 1 1 0 01-.21 1.11l-2.2 2.2z'/%3E%3C/svg%3E");
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.experience {
+    font-size: 14px;
+    margin-right: 10px;
+    color: lightblue;
+}
+
+.btn {
+    background-color: red;
+    color: white;
+    border-radius: 5px;
+    padding: 5px 10px;
+    margin: 0 5px;
+    cursor: pointer;
+    white-space: nowrap; /* Evita que el texto se corte o salte de línea */
+}
+
+.btn:hover {
+    background-color: darkred;
+}
+
+.location {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding-left: 24px; /* Espacio para el ícono */
+    color: white;
+    text-decoration: none;
+    margin-left: 10px;
+    font-size: 14px;
+    position: relative;
+}
+
+.location::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 16px;
+    height: 16px;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' fill='red' viewBox='0 0 24 24'><path d='M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5S10.62 6.5 12 6.5s2.5 1.12 2.5 2.5S13.38 11.5 12 11.5z'/></svg>");
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.page-header {
+    background-color: black;
+    padding: 40px 20px;
+}
+
+/* Títulos */
+.container {
+    max-width: 1200px; /* Valor para controlar el ancho */
+    margin: 0 auto; /* Centra el contenedor */
+    padding: 0 20px;
+}
+
+.back-btn {
+    display: inline-block;
+    color: white;
+    text-decoration: none;
+    margin-bottom: 10px;
+    font-size: 14px;
+}
+
+.title-line {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+}
+
+.page-title {
+    font-size: 32px;
+    font-weight: bold;
+    letter-spacing: 5px;
+    margin: 0;
+    text-transform: uppercase;
+}
+
+.line {
+    flex-grow: 1;
+    height: 2px;
+    background-color: white;
+}
+
+/* Footer styles */
+footer {
+    background-color: #222;
+    padding: 40px 20px;
+    color: white;
+    font-family: sans-serif;
+}
+
+.footer-container {
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+    max-width: 1400px;
+    margin: 0 auto;
+    gap: 20px;
+    flex-direction: row;
+    align-items: flex-start;
+}
+
+.footer-column {
+    flex: 1;
+    min-width: 150px;
+}
+
+.footer-column h3 {
+    border-bottom: 1px solid #888;
+    padding-bottom: 5px;
+    margin-bottom: 10px;
+    font-size: 14px;
+    text-transform: uppercase;
+    color: #e0e0e0;
+}
+
+.footer-column a {
+    display: block;
+    color: #ccc;
+    text-decoration: none;
+    font-size: 13px;
+    margin: 4px 0;
+}
+
+.footer-column a:hover {
+    color: #fff;
+}
+
+.payment-icons {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.payment-icons img {
+    width: 100px;
+    height: 30px;
+    object-fit: contain; /* Mantiene proporciones sin deformarlas */
+    margin-bottom: 10px;
+    vertical-align: middle;
+    /*background-color: #eee;   Para pruebas */
+}
+
+.libro-img {
+    width: 100px;
+    margin-top: 10px;
+}
+
+.social-icons {
+    margin-top: 10px;
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+.social-icons a {
+    width: 32px;
+    height: 32px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 4px;
+    background-color: #333;
+    text-decoration: none;
+    position: relative;
+}
+
+.social-icons a::before {
+    content: "";
+    display: block;
+    width: 18px;
+    height: 18px;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+/* Icono Facebook */
+.social-icons .facebook::before {
+    background-image: url("data:image/svg+xml;utf8,<svg fill='white' xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><path d='M22 12a10 10 0 1 0-11.5 9.87v-6.99h-2.1V12h2.1V9.8c0-2.07 1.23-3.21 3.1-3.21.9 0 1.84.16 1.84.16v2.02h-1.04c-1.03 0-1.36.64-1.36 1.3V12h2.3l-.37 2.88h-1.93v6.99A10 10 0 0 0 22 12z'/></svg>");
+}
+
+/* Icono X (Twitter) */
+.social-icons .x::before {
+    background-image: url("data:image/svg+xml;utf8,<svg fill='white' xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><path d='M20.39 3H17.4l-4.16 5.37L8.68 3H3l6.99 9.32L3 21h3.01l4.7-6.07L15.34 21H21l-7.22-9.58z'/></svg>");
+}
+
+/* Icono Instagram */
+.social-icons .instagram::before {
+    background-image: url("data:image/svg+xml;utf8,<svg fill='white' xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><path d='M7 2C4.2 2 2 4.2 2 7v10c0 2.8 2.2 5 5 5h10c2.8 0 5-2.2 5-5V7c0-2.8-2.2-5-5-5H7zm0 2h10c1.7 0 3 1.3 3 3v10c0 1.7-1.3 3-3 3H7c-1.7 0-3-1.3-3-3V7c0-1.7 1.3-3 3-3zm10.2 1.3c-.4 0-.7.3-.7.7s.3.7.7.7.7-.3.7-.7-.3-.7-.7-.7zM12 7a5 5 0 1 0 0 10 5 5 0 0 0 0-10zm0 2a3 3 0 1 1 0 6 3 3 0 0 1 0-6z'/></svg>");
+}
+
+select {
+    margin-top: 5px;
+    padding: 5px;
+    border-radius: 5px;
+}
+
+.carrito-icon {
+    margin-left: 15px;
+    font-size: 20px;
+    color: #333;
+    text-decoration: none;
+}
+
+.carrito-icon:hover {
+    color: #28a745; /* verde, como para indicar acción positiva */
+}
