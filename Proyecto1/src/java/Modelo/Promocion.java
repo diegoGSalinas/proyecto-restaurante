@@ -11,14 +11,14 @@ package Modelo;
 public class Promocion {
     private int id_promocion;
     private String nombre_promocion;
-    private String descripcion;
+    private String descuento;
     public Promocion(){
         
     }
-    public Promocion(int id_promocion, String nombre_promocion, String descripcion){
+    public Promocion(int id_promocion, String nombre_promocion, String descuento){
         this.id_promocion = id_promocion;
         this.nombre_promocion = nombre_promocion;
-        this.descripcion = descripcion;
+        this.descuento = descuento;
     }
     public int getIdPromocion(){
         return id_promocion;
@@ -26,8 +26,8 @@ public class Promocion {
     public String getNombrePromocion(){
         return nombre_promocion;
     }
-    public String getDescripcion(){
-        return descripcion;
+    public String getDescuento(){
+        return descuento;
     }
     public void setIdPromocion(int id_promocion){
           this.id_promocion = id_promocion;
@@ -35,8 +35,8 @@ public class Promocion {
     public void setNombrePromocion(String nombre_promocion){
           this.nombre_promocion = nombre_promocion;
     }
-    public void setDescripcion(String descripcion){
-          this.descripcion = descripcion;
+    public void setDescuento(String descuento){
+          this.descuento = descuento;
     } 
     
 }

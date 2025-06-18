@@ -170,7 +170,7 @@ public class ControladorCarrito extends HttpServlet {
             tabla.addCell("S/ " + String.format("%.2f", subtotal));
         }
 
-        Pedido pedido = new Pedido(totalGeneral, cliente.getId_cliente());
+        Pedido pedido = new Pedido(totalGeneral, cliente.getId_cliente(),"","","","","Procesado");
         PedidoDao pedidodao = new PedidoDao();
         int idpedido = pedidodao.insertarPedido(pedido);
 
