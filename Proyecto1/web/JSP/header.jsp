@@ -23,9 +23,23 @@
                         <a href="${pageContext.request.contextPath}/JSP/verCarrito.jsp" class="nav-link carrito-icon" title="Carrito">
                             <i class="fas fa-shopping-cart"></i>
                         </a>
-                        <a href="${pageContext.request.contextPath}/ControladorProductoAdm" class="nav-link" title="Administrar productos">
-                            <i class="fas fa-cog"></i> ADMINISTRAR
-                        </a> 
+                        <div class="dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                <i class="fas fa-cog"></i> ADMINISTRAR
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li>
+                                    <a class="dropdown-item" href="${pageContext.request.contextPath}/ControladorProductoAdm">
+                                        <i class="fas fa-box"></i> Productos
+                                    </a>
+                                </li>
+                                <li>
+                                    <a class="dropdown-item" href="${pageContext.request.contextPath}/ControladorMarca?accion=listar">
+                                        <i class="fas fa-tags"></i> Marcas
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
                         <span class="user-name"><%= cliente.getNombre()%></span>
                         <a href="${pageContext.request.contextPath}/JSP/logout.jsp" class="nav-link cerrar-sesion">CERRAR SESIÓN</a>
                     </div>
