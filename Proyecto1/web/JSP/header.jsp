@@ -38,6 +38,11 @@
                                         <i class="fas fa-tags"></i> Marcas
                                     </a>
                                 </li>
+                                <li>
+                                    <a class="dropdown-item" href="${pageContext.request.contextPath}/ControladorPedido">
+                                        <i class="fas fa-shopping-cart"></i> Pedidos
+                                    </a>
+                                </li>
                             </ul>
                         </div>
                         <span class="user-name"><%= cliente.getNombre()%></span>
