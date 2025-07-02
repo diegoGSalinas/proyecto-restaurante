@@ -11,7 +11,7 @@
                 </a>
                 <nav class="nav-links">
                     <a href="${pageContext.request.contextPath}/controladorProducto" class="nav-link">PRODUCTOS</a>
-                    <a href="${pageContext.request.contextPath}/JSP/newxhtml.xhtml" class="nav-link">NOSOTROS</a>
+                    <a href="${pageContext.request.contextPath}/JSP/aboutus.jsp" class="nav-link">NOSOTROS</a>
                 </nav>
             </div>
             <div class="header-right">
