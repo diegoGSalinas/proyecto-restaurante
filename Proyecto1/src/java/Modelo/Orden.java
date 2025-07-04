@@ -20,8 +20,8 @@ public class Orden {
     }
 
     // Constructor completo
-    public Orden(int id_orden, int id_producto, int cantidad, int id_pedido) {
-        this.id_orden = id_orden;
+    public Orden( int id_producto, int cantidad, int id_pedido) {
+        
         this.id_producto = id_producto;
         this.cantidad = cantidad;
         this.id_pedido = id_pedido;

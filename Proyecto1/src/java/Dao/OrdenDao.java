@@ -41,4 +41,24 @@ public class OrdenDao {
 
         return exito;
     }
+     public List listarOrden(int id_pedido) {
+        List<String[]> lista = new ArrayList<>();
+        String sql = "SELECT * FROM `orden`LEFT join producto on producto.id_producto = orden.id_producto LEFT join marcas on marcas.id_marca = producto.id_marca  WHERE id_pedido = "+ id_pedido  ;
+
+        try {
+            con = conexion.Iniciar_Conexion();
+
+            ps = con.prepareStatement(sql);
+            rs = ps.executeQuery();
+
+            while (rs.next()) {
+                String[] array1 ={rs.getString("nombre_producto"),String.valueOf(rs.getDouble("precio_producto")*rs.getDouble("cantidad")),rs.getString("latitud"),rs.getString("longitud")}; 
+               
+                lista.add(array1);
+            }
+        } catch (SQLException e) {
+            System.out.println("Error en Productos_DAO-Listar:\n" + e);
+        }
+        return lista;
+    }
 }

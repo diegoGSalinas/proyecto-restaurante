@@ -19,8 +19,10 @@
         <link rel="stylesheet" href="CSS/header.css" />
         <link rel="stylesheet" href="CSS/footer.css" />
         <link rel="stylesheet" href="CSS/main.css" />
+        <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+      
+       
     </head>
 
     <body>
@@ -70,7 +72,7 @@
                 </div>
                 <div class = "row">
                     <c:forEach var="marca" items="${marcas}">
-                        <div class="col-md-2 text-center" style="margin-bottom: 20px;">
+                        <div class="col-md-2 text-center">
                             <a href="${pageContext.request.contextPath}/ControladorProducto?marca=${marca.id_marca}" class="btn-marca-icono">
                                 <img src="${pageContext.request.contextPath}/Images/Restaurantes/${marca.img_marca}"
                                      alt="${marca.nombre_marca}" class="logo-restaurante" width="50"/>
@@ -109,8 +111,10 @@
                                 <p class="product-description mb-3"><%= p.getDescripcionProducto()%></p>
                                 <div class="product-footer d-flex justify-content-between align-items-center">
                                     <span class="price text-danger">S/ <%= p.getPrecioProducto()%></span>
-                                    <a href="CarritoController?id=<%= p.getIdProducto()%>" 
-                                       class="btn btn-danger btn-sm">Ordenar</a>
+                                     <button class="btn btn-danger btn-sm ordenar-btn" 
+                                            data-id="<%= p.getIdProducto()%>">
+                                        Ordenar
+                                    </button>
                                 </div>
                             </div>
                         </div>
@@ -152,8 +156,41 @@
         </section>
 
         <!-- Footer -->
-
+        
         <%@ include file="JSP/footer.jsp" %>
+        
+        <script>
+            document.addEventListener('DOMContentLoaded', function () {
+                const buttons = document.querySelectorAll('.ordenar-btn');
+               
+                buttons.forEach(btn => {
+                    btn.addEventListener('click', function () {
+                        
+                        const id_ = this.getAttribute('data-id');
+                        const accion = 'agregar';    
+                        $.post('CarritoController?accion=agregar', {
+                                id: id_
+			}, function(responseText) { 
+                            var nuevaCantidad = responseText;
+                            alert("Producto Agregado");
+                           
+				//$('#tabla').html(responseText);
+                            
+                             const cartCount = document.getElementById("cart-count");
+                            if (cartCount) {
+                                cartCount.textContent = nuevaCantidad;
+
+                                // Si estaba oculto, mostrarlo
+                                if (cartCount.classList.contains("d-none")) {
+                                    cartCount.classList.remove("d-none");
+                                }
+                            }
+			});
+                        
+                    });
+                });
+            });
+        </script>
     </body>
 
 </html>

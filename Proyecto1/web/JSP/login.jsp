@@ -1,5 +1,6 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%
     String mensaje = "";
 %>
@@ -59,7 +60,7 @@
                                 <a href="#" class="forgot-password text-decoration-none">¿Olvidaste la contraseña?</a>
                             </div>
 
-                            <c:if test="${not empty error}">
+                             <c:if test="${not empty error}">
                                 <div class="alert alert-danger">
                                     ${error}
                                 </div>

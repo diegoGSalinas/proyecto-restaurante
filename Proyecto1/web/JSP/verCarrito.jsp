@@ -193,19 +193,20 @@
                     <div style="display: flex; gap: 20px; align-items: flex-start;">
                         <!-- Columna del formulario -->
                         <div style="flex: 1;">
-                            <form action="pagoYape.jsp" method="post">
+                            <form action="${pageContext.request.contextPath}/CarritoController?accion=pagar" method="post">
+                                <input type="hidden" name="metodo_pago" value="yape">
                                 <label>Nombre del titular:</label><br>
-                                <input type="text" name="titular" pattern="[A-Za-zÑñ\s]+" required><br><br>
+                                <input type="text" name="nombre_pago" pattern="[A-Za-zÑñ\s]+" required><br><br>
                                 <!--Acepta solo números (\d),Hasta 8 dígitos, inputmode="numeric" muestra el teclado numérico en móviles-->
                                 <label>Número de operación:</label><br>
                                 <input type="text" name="nroOperacion" pattern="\d{8}" inputmode="numeric" maxlength="8" placeholder="(8 digitos)"required><br><br>
-                                <label>Celular asociado:</label><br>
-                                <input type="text" name="celular" pattern="\d{9}" inputmode="numeric" maxlength="9" required><br><br>
+                                <label>Celular:</label><br>
+                                <input type="text" name="telefono_pago" pattern="\d{9}" inputmode="numeric" maxlength="9" required><br><br>
                                 <label>Dirección de entrega:</label><br>
-                                <input type="text" name="direccion" required><br><br>
-                                <a href="#compraExitosa" class="btn-confirmar" style="text-decoration: none;">
+                                <input type="text" name="direccion_pago" required><br><br>
+                                <button type="submit" class="btn-confirmar" style="text-decoration: none;">
                                     <i class="fas fa-credit-card"></i> Confirmar Compra
-                                </a><br><br>
+                                </button><br><br>
                                 <a href="#resumenPedido" class="btn-actualizar" style="text-decoration: none" >volver al resumen</a>
                                     
                             </form>
@@ -225,19 +226,20 @@
                 <div style="display: flex; gap: 20px; align-items: flex-start;">
                     <!-- Columna del formulario -->
                     <div style="flex: 1;">
-                        <form action="pagoPlin.jsp" method="post">
+                        <form action="${pageContext.request.contextPath}/CarritoController?accion=pagar" method="post">
+                             <input type="hidden" name="metodo_pago" value="plin">
                             <label>Nombre del titular:</label><br>
-                                <input type="text" name="titular" pattern="[A-Za-zÑñ\s]+" required><br><br>
-                            <!--Acepta solo números (\d),Hasta 8 dígitos, inputmode="numeric" muestra el teclado numérico en móviles-->
-                            <label>Número de operación:</label><br>
+                                <input type="text" name="nombre_pago" pattern="[A-Za-zÑñ\s]+" required><br><br>
+                                <!--Acepta solo números (\d),Hasta 8 dígitos, inputmode="numeric" muestra el teclado numérico en móviles-->
+                                <label>Número de operación:</label><br>
                                 <input type="text" name="nroOperacion" pattern="\d{8}" inputmode="numeric" maxlength="8" placeholder="(8 digitos)"required><br><br>
-                            <label>Celular asociado:</label><br>
-                                <input type="text" name="celular" pattern="\d{9}" inputmode="numeric" maxlength="9" required><br><br>
-                            <label>Dirección de entrega:</label><br>
-                                <input type="text" name="direccion" required><br><br>
-                            <a href="#compraExitosa" class="btn-confirmar" style="text-decoration: none;">
+                                <label>Celular:</label><br>
+                                <input type="text" name="telefono_pago" pattern="\d{9}" inputmode="numeric" maxlength="9" required><br><br>
+                                <label>Dirección de entrega:</label><br>
+                                <input type="text" name="direccion_pago" required><br><br>
+                                <button type="submit" class="btn-confirmar" style="text-decoration: none;">
                                     <i class="fas fa-credit-card"></i> Confirmar Compra
-                                </a><br><br>
+                                </button><br><br>
                                 <a href="#resumenPedido" class="btn-actualizar" style="text-decoration: none" >volver al resumen</a>
                                  
                         </form>
@@ -256,20 +258,23 @@
                     <!-- Aquí va el formulario BCP -->
                     <h4>Transferencia BCP</h4>
                 <p>Datos para transferencia: <strong>CCI 002-123456789012345678</strong></p>
-                <form action="pagoBCP.jsp" method="post">
-                    
+                <form action="${pageContext.request.contextPath}/CarritoController?accion=pagar" method="post">
+                     <input type="hidden" name="metodo_pago" value="bcp">
                     <label>Nombre del titular:</label><br>
-                        <input type="text" name="titular" pattern="[A-Za-zÑñ\s]+" required><br><br>
+                        <input type="text" name="nombre_pago" pattern="[A-Za-zÑñ\s]+" required><br><br>
                     <label>Número de tarjeta:</label><br>
                         <input type="text" name="numeroTarjeta" maxlength="19" placeholder="XXXX-XXXX-XXXX-XXXX" required><br><br>
                     <label>Número de operación:</label><br>
                         <input type="text" name="nroOperacion" pattern="\d{8}" required><br><br>
+                        <!--Acepta solo números (\d),Hasta 8 dígitos, inputmode="numeric" muestra el teclado numérico en móviles-->
+                    <label>Celular:</label><br>
+                          <input type="text" name="telefono_pago" pattern="\d{9}" inputmode="numeric" maxlength="9" required><br><br>
                     <label>Dirección de entrega:</label><br>
-                        <input type="text" name="direccion" required><br><br>
-                    <a href="#compraExitosa" class="btn-confirmar" style="text-decoration: none;">
+                          <input type="text" name="direccion_pago" required><br><br>
+                    <button type="submit" class="btn-confirmar" style="text-decoration: none;">
                                     <i class="fas fa-credit-card"></i> Confirmar Compra
-                                </a><br><br>
-                                <a href="#resumenPedido" class="btn-actualizar" style="text-decoration: none" >volver al resumen</a>
+                    </button><br><br>
+                    <a href="#resumenPedido" class="btn-actualizar" style="text-decoration: none" >volver al resumen</a>
                                         
                 </form>
 
@@ -278,11 +283,16 @@
                 <div id="formularioCredito" style="display: none;">
                     <!-- Aquí va el formulario Credito -->
                     <h4>Pago a Credito</h4>
-                <form action="pagoCredito.jsp" method="post">
-                    
-                    <label>Nombre del titular:</label><br>
-                    <input type="text" name="titular" pattern="[A-Za-zÑñ\s]+" required><br><br>
-
+                <form action="${pageContext.request.contextPath}/CarritoController?accion=pagar" method="post">
+                     <input type="hidden" name="metodo_pago" value="credito">
+                   <label>Nombre del titular:</label><br>
+                     <input type="text" name="nombre_pago" pattern="[A-Za-zÑñ\s]+" required><br><br>
+                                <!--Acepta solo números (\d),Hasta 8 dígitos, inputmode="numeric" muestra el teclado numérico en móviles-->
+                   <label>Celular:</label><br>
+                      <input type="text" name="telefono_pago" pattern="\d{9}" inputmode="numeric" maxlength="9" required><br><br>
+                   <label>Dirección de entrega:</label><br>
+                      <input type="text" name="direccion_pago" required><br><br>
+                      
                     <label>Número de tarjeta:</label><br>
                     <input type="text" name="numeroTarjeta" maxlength="19" placeholder="XXXX-XXXX-XXXX-XXXX" required><br><br>
                     
@@ -292,11 +302,10 @@
                     <label>Código CVV:</label><br>
                     <input type="password" name="cvv" maxlength="4" required><br><br>
 
-                    <label>Dirección de entrega:</label><br>
-                    <input type="text" name="direccion" required><br><br>
-                    <button type="submit" class="btn-confirmar">
-                        <i class="fas fa-credit-card"></i> Confirmar Compra
-                        </button><br><br>
+                    
+                    <button type="submit" class="btn-confirmar" style="text-decoration: none;">
+                          <i class="fas fa-credit-card"></i> Confirmar Compra
+                       </button><br><br>
                                 
                         <a href="#resumenPedido" class="btn-actualizar" style="text-decoration: none" >volver al resumen</a>
                                     
@@ -337,7 +346,6 @@
 
 
        <script>
-           
 function ocultarTodosLosFormularios() {
     const formularios = [
         "formularioYape",
@@ -361,7 +369,6 @@ function mostrarFormulario(idFormulario) {
         formulario.style.display = "block";
     }
 }
-
 </script>
 
             <%@ include file="footer.jsp" %>

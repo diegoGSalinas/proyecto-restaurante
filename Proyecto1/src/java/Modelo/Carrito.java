@@ -12,7 +12,7 @@ public class Carrito {
     private String producto;
     private int cantidad;
     private double precio;
-
+    private int id_producto;
     // Constructor vacío
     public Carrito() {
     }
@@ -28,7 +28,12 @@ public class Carrito {
     public String getProducto() {
         return producto;
     }
-
+    public int getId_producto(){
+        return id_producto;
+    }
+    public void setId_producto(int id_producto){
+        this.id_producto = id_producto;
+    }
     public void setProducto(String producto) {
         this.producto = producto;
     }

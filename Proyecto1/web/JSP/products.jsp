@@ -13,7 +13,7 @@
         <link rel="stylesheet" href="${pageContext.request.contextPath}/CSS/header.css" />
         <link rel="stylesheet" href="${pageContext.request.contextPath}/CSS/footer.css" />
         <link rel="stylesheet" href="${pageContext.request.contextPath}/CSS/productsMarcasCategorias.css" />
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+        <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 
     </head>
 
@@ -74,7 +74,11 @@
                                                         <p>${producto.descripcionProducto}</p>
                                                         <div class="promo-footer">
                                                             <span class="price">S/ ${producto.precioProducto}</span>
-                                                            <a class="order-btn" href="CarritoController?id=${producto.idProducto}">Ordenar</a>
+                                                             <button class="btn btn-primary btn-sm ordenar-btn" 
+                                                                    data-id="${producto.idProducto}">
+                                                                Ordenar
+                                                            </button>
+                                                           
                                                         </div>
                                                     </div>
                                                 </div>
@@ -101,7 +105,36 @@
         </section>
 
         <%@ include file="footer.jsp" %>
+           <script>
+            document.addEventListener('DOMContentLoaded', function () {
+                const buttons = document.querySelectorAll('.ordenar-btn');
+               
+                buttons.forEach(btn => {
+                    btn.addEventListener('click', function () {
+                        
+                        const id_ = this.getAttribute('data-id');
+                        const accion = 'agregar';    
+                        $.post('CarritoController?accion=agregar', {
+                                id: id_
+			}, function(responseText) { 
+                            var nuevaCantidad = responseText;
+                            alert("Producto Agregado");
+                           
+                             const cartCount = document.getElementById("cart-count");
+                            if (cartCount) {
+                                cartCount.textContent = nuevaCantidad;
 
+                                // Si estaba oculto, mostrarlo
+                                if (cartCount.classList.contains("d-none")) {
+                                    cartCount.classList.remove("d-none");
+                                }
+                            }
+			});
+                        
+                    });
+                });
+            });
+        </script>
     </body>
 
 </html>

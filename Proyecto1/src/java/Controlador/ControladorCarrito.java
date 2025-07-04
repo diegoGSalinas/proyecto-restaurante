@@ -9,6 +9,7 @@ import Modelo.Carrito;
 import Modelo.Producto;
 import Modelo.Cliente;
 import Modelo.Pedido;
+import Modelo.Orden;
 import Dao.PedidoDao;
 import Dao.OrdenDao;
 import Modelo.Orden;
@@ -66,7 +67,7 @@ public class ControladorCarrito extends HttpServlet {
 
             if (producto != null) {
                 Carrito item = new Carrito(producto.getNombreProducto(), 1, producto.getPrecioProducto());
-
+                item.setId_producto(producto.getIdProducto());
                 HttpSession session = request.getSession();
                 ArrayList<Carrito> carrito = (ArrayList<Carrito>) session.getAttribute("carrito");
                 if (carrito == null) {
@@ -85,8 +86,7 @@ public class ControladorCarrito extends HttpServlet {
                 if (!existe) {
                     carrito.add(item);
                 }
-
-                session.setAttribute("carrito", carrito);
+               
             }
 
         }
@@ -118,6 +118,70 @@ public class ControladorCarrito extends HttpServlet {
             session.setAttribute("carrito", carrito);
             response.sendRedirect("JSP/verCarrito.jsp");
         }
+        else if ("pagar".equals(accion)) {
+             HttpSession session = request.getSession();
+             String metodo_pago = request.getParameter("metodo_pago");
+             String nombre = request.getParameter("nombre_pago");
+             String telefono = request.getParameter("telefono_pago");
+             String direccion =request.getParameter("direccion_pago");
+             HttpSession session2 = request.getSession();
+             Pedido pago = new Pedido();
+             pago.setMetodo_pago(metodo_pago);
+             pago.setDireccion_pago(direccion);
+             pago.setTelefono_pago(telefono);
+             pago.setNombre_pago(nombre);
+             pago.setEstado("procesado");
+             session2.setAttribute("pago",pago);
+             response.sendRedirect("JSP/verCarrito.jsp#compraExitosa");
+        }
+        else if ("agregar".equals(accion)) {
+            
+            int id = Integer.parseInt(request.getParameter("id"));
+            int cantidad = 0;
+            ProductoDao productoDAO = new ProductoDao();
+            Producto producto = productoDAO.obtenerProductoPorId(id);
+
+            if (producto != null) {
+                Carrito item = new Carrito(producto.getNombreProducto(), 1, producto.getPrecioProducto());
+                item.setId_producto(producto.getIdProducto());
+
+                HttpSession session = request.getSession();
+                ArrayList<Carrito> carrito = (ArrayList<Carrito>) session.getAttribute("carrito");
+                if (carrito == null) {
+                    carrito = new ArrayList<>();
+                }
+
+                // Verificar si ya existe el producto en el carrito (por ID)
+                boolean existe = false;
+                for (Carrito c : carrito) {
+                    if (c.getId_producto() == producto.getIdProducto()) {
+                        c.setCantidad(c.getCantidad() + 1);
+                        existe = true;
+                        break;
+                    }
+                }
+
+                if (!existe) {
+                    carrito.add(item);
+                }
+                
+                if (session.getAttribute("cantidad") != null) {
+                    cantidad = (int)session.getAttribute("cantidad");
+                }
+                
+                session.setAttribute("cantidad",cantidad+1);
+                
+                session.setAttribute("carrito", carrito);
+
+                // Respuesta AJAX (texto plano, puedes devolver JSON si prefieres)
+                response.setContentType("text/plain");
+               
+            } else {
+                response.sendError(HttpServletResponse.SC_NOT_FOUND, "Producto no encontrado");
+            }
+            PrintWriter out = response.getWriter();
+            out.println(cantidad+1);
+        }
     }
 
     @Override
@@ -132,7 +196,7 @@ public class ControladorCarrito extends HttpServlet {
         HttpSession session = request.getSession();
         ArrayList<Carrito> carrito = (ArrayList<Carrito>) session.getAttribute("carrito");
         Cliente cliente = (Cliente) session.getAttribute("cliente");
-
+        Pedido pedido = (Pedido) session.getAttribute("pago");
         // Configurar la respuesta
         response.setContentType("application/pdf");
         response.setHeader("Content-Disposition", "attachment; filename=voucher.pdf");
@@ -169,11 +233,19 @@ public class ControladorCarrito extends HttpServlet {
             tabla.addCell("S/ " + String.format("%.2f", item.getPrecio()));
             tabla.addCell("S/ " + String.format("%.2f", subtotal));
         }
-
-        Pedido pedido = new Pedido(totalGeneral, cliente.getId_cliente(),"","","","","Procesado");
+        pedido.setId_cliente(cliente.getId_cliente());
+        pedido.setTotal(totalGeneral);
+        
         PedidoDao pedidodao = new PedidoDao();
         int idpedido = pedidodao.insertarPedido(pedido);
-
+        
+        for (Carrito item : carrito) {
+            int cantidad = item.getCantidad();
+            int id_producto = item.getId_producto();
+            Orden orden = new Orden(id_producto,cantidad,idpedido);
+            OrdenDao ordendao = new OrdenDao();
+            ordendao.insertarOrden(orden);
+        }
         // Fila del total general
         PdfPCell celdaTotal = new PdfPCell(new Paragraph("Total General:"));
         celdaTotal.setColspan(3);
