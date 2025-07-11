@@ -47,6 +47,11 @@
                             <i class="fas fa-shopping-cart"></i> Órdenes
                         </a>
                     </li>
+                    <li>
+                        <a href="${pageContext.request.contextPath}/ControladorEstadisticas">
+                            <i class="fas fa-shopping-cart"></i> Estadisticas
+                        </a>
+                    </li>
                 </ul>
             </div>
 
