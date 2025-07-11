@@ -38,7 +38,7 @@
                         </a>
                     </li>
                     <li>
-                        <a href="${pageContext.request.contextPath}/ControladorMarca">
+                        <a href="${pageContext.request.contextPath}/ControladorMarca?accion=listar">
                             <i class="fas fa-tags"></i> Marcas
                         </a>
                     </li>

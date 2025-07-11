@@ -37,7 +37,8 @@
                 <nav class="nav-links">
                     <a href="${pageContext.request.contextPath}/controladorProducto" class="nav-link">PRODUCTOS</a>
                     <a href="${pageContext.request.contextPath}/JSP/aboutus.jsp" class="nav-link">NOSOTROS</a>
-                      <a href="${pageContext.request.contextPath}/controladorOrden" class="nav-link">ORDENES</a>
+                    <a href="${pageContext.request.contextPath}/controladorOrden" class="nav-link">ORDENES</a>
+
                 </nav>
             </div>
             <div class="header-right">
@@ -54,9 +55,28 @@
                                 <span class="cart-count d-none" id="cart-count">0</span>
                             <% } %>
                         </a>
-                        <a href="${pageContext.request.contextPath}/ControladorProductoAdm" class="nav-link" title="Administrar productos">
-                            <i class="fas fa-cog"></i> ADMINISTRAR
-                        </a> 
+                        <div class="dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                <i class="fas fa-cog"></i> ADMINISTRAR
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li>
+                                    <a class="dropdown-item" href="${pageContext.request.contextPath}/ControladorProductoAdm">
+                                        <i class="fas fa-box"></i> Productos
+                                    </a>
+                                </li>
+                                <li>
+                                    <a class="dropdown-item" href="${pageContext.request.contextPath}/ControladorMarca?accion=listar">
+                                        <i class="fas fa-tags"></i> Marcas
+                                    </a>
+                                </li>
+                                <li>
+                                    <a class="dropdown-item" href="${pageContext.request.contextPath}/ControladorPedido">
+                                        <i class="fas fa-shopping-cart"></i> Pedidos
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
                         <span class="user-name"><%= cliente.getNombre()%></span>
                         <a href="${pageContext.request.contextPath}/JSP/logout.jsp" class="nav-link cerrar-sesion">CERRAR SESIÓN</a>
                     </div>

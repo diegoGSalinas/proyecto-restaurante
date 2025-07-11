@@ -31,10 +31,15 @@
         <servlet-name>controladorProducto</servlet-name>
         <servlet-class>Controlador.ControladorProducto</servlet-class>
     </servlet>
-        
+    
     <servlet>
         <servlet-name>ControladorMementoProducto</servlet-name>
         <servlet-class>Controlador.ControladorMementoProducto</servlet-class>
+    </servlet>
+    
+    <servlet>
+        <servlet-name>ControladorMarca</servlet-name>
+        <servlet-class>Controlador.ControladorMarca</servlet-class>
     </servlet>
 
     <servlet-mapping>
@@ -48,6 +53,11 @@
     <servlet-mapping>  
         <servlet-name>CarritoController</servlet-name>
         <url-pattern>/CarritoController</url-pattern>
+    </servlet-mapping>
+    
+    <servlet-mapping>
+        <servlet-name>ControladorMarca</servlet-name>
+        <url-pattern>/ControladorMarca</url-pattern>
     </servlet-mapping> 
     <servlet-mapping>  
         <servlet-name>controladorProducto</servlet-name>
