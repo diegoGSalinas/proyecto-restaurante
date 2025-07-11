@@ -1,0 +1,230 @@
+
+        body {
+            background-color: #f3f4f6;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        /* Estilos del main-container (tomados de productosAdm.css) */
+        .main-container {
+            display: flex;
+            flex: 1; /* Permite que este contenedor ocupe el espacio restante */
+            min-height: calc(100vh - 100px); /* Ajuste para header y footer */
+            margin-bottom: 100px; /* Espacio para el footer */
+           
+        }
+
+        /* Estilos para el sidebar (tomados de productosAdm.css) */
+        .sidebar {
+            width: 250px;
+            background-color: #f8f9fa;
+            padding: 1.5rem;
+            border-right: 1px solid #dee2e6;
+            box-shadow: 2px 0 5px rgba(0, 0, 0, 0.05); /* Sombra ligera para destacar */
+            flex-shrink: 0; /* Evita que el sidebar se encoja */
+        }
+
+        .sidebar h3 {
+            margin-bottom: 1.5rem;
+            font-size: 1.25rem;
+            color: #2c3e50;
+            text-align: center; /* Centrar el título del panel */
+        }
+
+        .nav-menu {
+            list-style: none;
+            padding: 0;
+        }
+
+        .nav-menu li {
+            margin-bottom: 0.5rem;
+        }
+
+        .nav-menu a {
+            color: #2c3e50;
+            text-decoration: none;
+            padding: 0.75rem 1rem;
+            display: block;
+            border-radius: 0.25rem;
+            transition: all 0.3s ease;
+        }
+
+        .nav-menu a:hover {
+            color: #dc3545;
+            background-color: #f8f9fa; /* Un gris más claro para el hover */
+            transform: translateX(5px);
+        }
+
+        .nav-menu a.active {
+            color: #dc3545;
+            background-color: #f8f9fa;
+            border-left: 3px solid #dc3545;
+        }
+
+        .nav-menu i {
+            margin-right: 0.5rem;
+        }
+
+        /* Contenido principal (tomado de productosAdm.css) */
+        .main-content {
+            flex: 1;
+            padding: 1.5rem;
+            background-color: #f8f9fa; /* Asegurar el fondo para el contenido */
+        }
+
+        /* Estilos para las secciones de estadísticas (adaptados de estadisticas.jsp) */
+        .contenedor-principal-estadisticas {
+           
+            margin-bottom: 2rem;
+            padding: 1rem;
+            max-width: 64rem; 
+            margin-left: auto; /* Centrar dentro de main-content */
+            margin-right: auto; 
+        }
+
+        .titulo-principal-estadisticas {
+            text-align: center;
+            font-size: 2.25rem; 
+            font-weight: 800; 
+            color: #1f2937; 
+            margin-bottom: 2rem; 
+        }
+
+        .resumen-total {
+            color: white;
+            padding: 1.5rem; 
+            border-radius: 0.5rem; 
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06); 
+            margin-bottom: 1.5rem; 
+            text-align: center;
+        }
+        .resumen-total h3 {
+            font-size: 1.875rem; 
+            font-weight: 700; 
+        }
+        /* Colores específicos para los resúmenes totales*/
+        #totalPedidosSection {
+            background-color: #dc3545; 
+        }
+        #ingresosTotalesSection {
+            background-color: seagreen; 
+        }
+
+
+        .seccion-estadistica {
+            background-color: white;
+            padding: 1.5rem; 
+            border-radius: 0.5rem; 
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06); 
+            margin-bottom: 1.5rem; 
+        }
+
+        .subtitulo-seccion {
+            font-size: 1.5rem; 
+            font-weight: 600; 
+            color: #374151; 
+            margin-bottom: 0.75rem; 
+        }
+
+        .parrafo-descripcion {
+            color: #4b5563; 
+            margin-bottom: 1rem; 
+        }
+
+        .lista-detalles {
+            list-style-type: disc; /* list-disc */
+            list-style-position: inside; /* list-inside */
+            color: #374151; 
+            margin-top: 1rem; 
+        }
+        .lista-detalles li {
+            margin-bottom: 0.5rem; 
+        }
+        
+        .back-btn {
+            display: inline-block;
+            padding: 0.75rem 1.5rem;
+            background-color: #dc3545;
+            color: white;
+            border-radius: 0.5rem;
+            text-decoration: none;
+            transition: background-color 0.3s ease;
+        }
+        .back-btn:hover {
+            background-color: #4338ca; 
+            color: white;
+        }
+        /* Estilos para los contenedores de gráficos */
+        .contenedor-grafico {
+            position: relative;
+            margin: auto;
+            height: 400px; /* Altura fija para los gráficos */
+            width: 80%; /* Ancho responsivo */
+            max-width: 600px; /* Ancho máximo para evitar que sean demasiado grandes */
+        }
+        @media (max-width: 768px) {
+            .contenedor-grafico {
+                width: 95%;
+                height: 300px;
+            }
+        }
+
+        /* Estilos para el índice de estadísticas (horizontal) */
+        #indiceEstadisticas .lista-detalles {
+            display: flex;
+            flex-wrap: wrap; /* Permite que los elementos se envuelvan a la siguiente línea si no hay espacio */
+            justify-content: center; /* Centra los elementos horizontalmente */
+            padding: 0;
+            list-style: none; /* Quita los puntos de la lista */
+            gap: 10px; /* Espacio entre los elementos */
+        }
+
+        #indiceEstadisticas .lista-detalles li {
+            flex-grow: 1; /* Permite que los elementos crezcan para ocupar el espacio disponible */
+            flex-basis: auto; /* Permite que el tamaño base se ajuste al contenido */
+        }
+
+        #indiceEstadisticas .lista-detalles a {
+            display: flex; /* Usar flexbox para centrar contenido vertical y horizontalmente */
+            align-items: center; /* Centrar verticalmente */
+            justify-content: center; /* Centrar horizontalmente */
+            padding: 0.5rem 1rem;
+            background-color: #e2e8f0; /* Un gris claro para el fondo del botón */
+            color: #334155; /* Color de texto oscuro */
+            border-radius: 0.25rem;
+            text-decoration: none;
+            transition: background-color 0.3s ease, color 0.3s ease;
+            white-space: nowrap; /* Evita que el texto del enlace se rompa en varias líneas */
+            min-width: 180px; /* Establece un ancho mínimo para uniformidad */
+            height: 50px; /* Establece una altura fija para uniformidad */
+            box-sizing: border-box; /* Incluye padding y border en el tamaño total */
+        }
+
+        #indiceEstadisticas .lista-detalles a:hover {
+            background-color: #cbd5e1; /* Un gris un poco más oscuro al pasar el ratón */
+            color: #1a202c; /* Color de texto más oscuro al pasar el ratón */
+        }
+
+        /* Nuevos estilos para ocultar elementos y el botón "ver más" */
+        .hidden-list-item {
+            display: none;
+        }
+        .show-more-btn {
+            display: block;
+            margin-top: 1rem;
+            padding: 0.75rem 1.5rem;
+            background-color: #dc3545; /* Bootstrap primary blue */
+            color: white;
+            border: none;
+            border-radius: 0.25rem;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            text-align: center;
+            width: fit-content; /* Make button fit content */
+            margin-left: auto;
+            margin-right: auto;
+        }
+        .show-more-btn:hover {
+            background-color: #0056b3;
+        }
