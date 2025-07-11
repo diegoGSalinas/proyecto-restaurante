@@ -1,6 +1,7 @@
-package Controlador; 
+package Controlador;
 
 import Dao.ProductoDao;
+import Dao.EstadisticasDao; // Importa el nuevo DAO
 import Modelo.Producto;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -16,50 +17,69 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-
 @WebServlet("/ControladorEstadisticas")
 public class ControladorEstadisticas extends HttpServlet {
     private static final long serialVersionUID = 1L;
 
     @Override
-protected void doGet(HttpServletRequest request, HttpServletResponse response)
-        throws ServletException, IOException {
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
 
-    // Obtener productos desde la base de datos usando tu DAO real
-    ProductoDao dao = new ProductoDao();
-    List<Producto> productos = dao.listar();
-    
-        //ventas "Realizadas" (productoId, cantidadVendida)
-        Map<Integer, Integer> ventaRealizadas = new HashMap<>();
-        ventaRealizadas.put(1, 50); 
-        ventaRealizadas.put(2, 75); 
-        ventaRealizadas.put(3, 30); 
-        ventaRealizadas.put(4, 120); 
-        ventaRealizadas.put(5, 60); 
-        ventaRealizadas.put(6, 40); 
-        ventaRealizadas.put(7, 90); 
-        ventaRealizadas.put(8, 25); 
+        // Instancia de los DAOs
+        ProductoDao productoDao = new ProductoDao();
+        EstadisticasDao estadisticasDao = new EstadisticasDao();
 
-        // --- CÁLCULO DE ESTADÍSTICAS ---
+        // Obtener la lista completa de productos (necesario para mapear IDs a nombres y precios)
+        List<Producto> productos = productoDao.listar();
+
+        // --- OBTENER ESTADÍSTICAS DESDE LA BASE DE DATOS ---
 
         // 1. Productos más comprados (ordenados de mayor a menor)
-        List<Map.Entry<Integer, Integer>> productosMasCompradosEntries = ventaRealizadas.entrySet().stream()
-                .sorted(Map.Entry.comparingByValue(Comparator.reverseOrder()))
+        Map<String, Integer> productosMasCompradosMap = estadisticasDao.obtenerProductosMasPedidos();
+        List<String> productosMasCompradosLabels = new ArrayList<>();
+        List<Integer> productosMasCompradosData = new ArrayList<>();
+        productosMasCompradosMap.forEach((nombre, cantidad) -> {
+            productosMasCompradosLabels.add(nombre);
+            productosMasCompradosData.add(cantidad);
+        });
+        request.setAttribute("productosMasCompradosLabels", productosMasCompradosLabels);
+        request.setAttribute("productosMasCompradosData", productosMasCompradosData);
+
+        // También mantenemos la lista formateada para mostrarla como texto
+        List<String> nombresMasCompradosFormatted = productosMasCompradosMap.entrySet().stream()
+                .map(entry -> entry.getKey() + " (" + entry.getValue() + " unidades)")
                 .collect(Collectors.toList());
+        request.setAttribute("productosMasComprados", nombresMasCompradosFormatted);
 
-        List<String> nombresMasComprados = new ArrayList<>();
-        for (Map.Entry<Integer, Integer> entry : productosMasCompradosEntries) {
-            Producto p = productos.stream()
-                            .filter(prod -> prod.getIdProducto() == entry.getKey())
-                            .findFirst()
-                            .orElse(null);
-            if (p != null) {
-                nombresMasComprados.add(p.getNombreProducto() + " (" + entry.getValue() + " unidades)");
-            }
-        }
-        request.setAttribute("productosMasComprados", nombresMasComprados);
 
-        // 2. Productos menos comprados (ordenados de menor a mayor)
+        // 2. Métodos de Pago Preferidos por Clientes
+        Map<String, Long> metodosPagoPreferidosMap = estadisticasDao.obtenerMetodosPagoPreferidos();
+        List<String> metodosPagoPreferidosLabels = new ArrayList<>();
+        List<Long> metodosPagoPreferidosData = new ArrayList<>();
+        metodosPagoPreferidosMap.forEach((metodo, cantidad) -> {
+            metodosPagoPreferidosLabels.add(metodo);
+            metodosPagoPreferidosData.add(cantidad);
+        });
+        request.setAttribute("metodosPagoPreferidosLabels", metodosPagoPreferidosLabels);
+        request.setAttribute("metodosPagoPreferidosData", metodosPagoPreferidosData);
+
+        // También mantenemos la lista formateada para mostrarla como texto
+        List<String> metodosPagoListFormatted = metodosPagoPreferidosMap.entrySet().stream()
+                .map(entry -> entry.getKey() + ": " + entry.getValue() + " pedidos")
+                .collect(Collectors.toList());
+        request.setAttribute("metodosPagoPreferidos", metodosPagoListFormatted);
+
+
+        // 3. Número Total de Pedidos
+        long totalPedidos = estadisticasDao.obtenerNumeroTotalPedidos();
+        request.setAttribute("totalPedidos", totalPedidos);
+
+        // --- CÁLCULOS ADICIONALES (usando datos reales de la DB) ---
+
+        // Obtener las ventas reales por producto desde la base de datos
+        Map<Integer, Integer> ventaRealizadas = estadisticasDao.obtenerCantidadVendidaPorProducto();
+
+        // 4. Productos menos comprados (ordenados de menor a mayor)
         List<Map.Entry<Integer, Integer>> productosMenosCompradosEntries = ventaRealizadas.entrySet().stream()
                 .sorted(Map.Entry.comparingByValue())
                 .collect(Collectors.toList());
@@ -67,16 +87,16 @@ protected void doGet(HttpServletRequest request, HttpServletResponse response)
         List<String> nombresMenosComprados = new ArrayList<>();
         for (Map.Entry<Integer, Integer> entry : productosMenosCompradosEntries) {
             Producto p = productos.stream()
-                            .filter(prod -> prod.getIdProducto() == entry.getKey())
-                            .findFirst()
-                            .orElse(null);
+                    .filter(prod -> prod.getIdProducto() == entry.getKey())
+                    .findFirst()
+                    .orElse(null);
             if (p != null) {
                 nombresMenosComprados.add(p.getNombreProducto() + " (" + entry.getValue() + " unidades)");
             }
         }
         request.setAttribute("productosMenosComprados", nombresMenosComprados);
 
-        // 3. Total de ventas por producto (detallado) y cálculo de ingresos totales
+        // 5. Total de ventas por producto (detallado) y cálculo de ingresos totales
         List<String> ventasPorProducto = new ArrayList<>();
         double ingresosTotales = 0.0;
         for (Producto p : productos) {
@@ -88,16 +108,17 @@ protected void doGet(HttpServletRequest request, HttpServletResponse response)
         request.setAttribute("ventasPorProducto", ventasPorProducto);
         request.setAttribute("ingresosTotales", String.format("%.2f", ingresosTotales));
 
-        // 4. Conteo de productos por categoría
+        // 6. Conteo de productos por categoría (basado en la lista de productos obtenida)
         Map<Integer, Long> conteoPorCategoria = productos.stream()
                 .collect(Collectors.groupingBy(Producto::getIdCategoria, Collectors.counting()));
-        request.setAttribute("conteoPorCategoria", conteoPorCategoria); 
+        request.setAttribute("conteoPorCategoria", conteoPorCategoria);
 
-        // 5. Conteo de productos por marca
+        // 7. Conteo de productos por marca (basado en la lista de productos obtenida)
         Map<Integer, Long> conteoPorMarca = productos.stream()
                 .collect(Collectors.groupingBy(Producto::getIdMarca, Collectors.counting()));
         request.setAttribute("conteoPorMarca", conteoPorMarca);
-        
+
+        // Redireccionar a la página JSP para mostrar las estadísticas
         request.getRequestDispatcher("JSP/estadisticas.jsp").forward(request, response);
     }
 }
