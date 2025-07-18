@@ -39,7 +39,8 @@
                         <th scope="row">${pedido.id_pedido}</th>
                         <td>S/ ${pedido.total}</td>
                         <td>${pedido.estado}</td>
-                        <td><form action="${pageContext.request.contextPath}/controladorOrden" method="post" style="display:inline;">
+                        <td> <c:if test="${pedido.estado != 'DEVOLUCION_FINALIZADA' && pedido.estado != 'FINALIZADO'}">
+                            <form action="${pageContext.request.contextPath}/controladorOrden" method="post" style="display:inline;">
                                 <input type="hidden" name="id" value="${pedido.id_pedido}" />
                                 
                                  <button type="submit" class="btn btn-primary" name="accion" 
@@ -47,8 +48,10 @@
                                  <i class="fa fa-search"></i>
                                  </button>
                              </form>
+                                
                             <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#modalReembolso" data-id="${pedido.id_pedido}"> <i class="fa fa-trash"></i></button></td>
-                      </tr>
+                            </c:if>
+                        </tr>
                       </c:forEach>
                      
                     </tbody>

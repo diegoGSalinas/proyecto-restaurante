@@ -88,10 +88,17 @@
                                             <td>${pedido.telefono_pago}</td>
                                             <td>
                                                 <span class="badge ${pedido.estado == 'PENDIENTE' || pedido.estado == 'EN_CAMINO' ? 'bg-success' : 
-                                                    pedido.estado == 'PROCESANDO_DEVOLUCIO' ? 'bg-warning' : 
-                                                    pedido.estado == 'DEVOLUCION_FINALIZAD' ? 'bg-danger' : 'bg-primary'}">
-                                                    ${pedido.estado}
+                                                    pedido.estado == 'Procesando Devolucion' ? 'bg-warning' : 
+                                                    pedido.estado == 'DEVOLUCION_FINALIZADA' ? 'bg-danger' : 'bg-primary'}">
+                                                    ${pedido.estado} 
                                                 </span>
+                                                <br><c:if test="${pedido.estado == 'Procesando Devolucion'}">
+                                                    <span style="font-siZe:10px" >
+                                                        ${pedido.motivo}
+                                                    </span>
+                                                    
+                                                 
+                                                 </c:if>
                                             </td>
                                             <td>
                                                 <c:if test="${pedido.estado != 'FINALIZADO'}">
@@ -101,8 +108,8 @@
                                                         <select name="nuevoEstado" class="form-select form-select-sm">
                                                             <option value="PENDIENTE" ${pedido.estado == 'PENDIENTE' ? 'selected' : ''}>PENDIENTE</option>
                                                             <option value="EN_CAMINO" ${pedido.estado == 'EN_CAMINO' ? 'selected' : ''}>EN_CAMINO</option>
-                                                            <option value="PROCESANDO_DEVOLUCION" ${pedido.estado == 'PROCESANDO_DEVOLUCIO' ? 'selected' : ''}>PROCESANDO_DEVOLUCION</option>
-                                                            <option value="DEVOLUCION_FINALIZADA" ${pedido.estado == 'DEVOLUCION_FINALIZAD' ? 'selected' : ''}>DEVOLUCION_FINALIZADA</option>
+                                                            <option value="PROCESANDO_DEVOLUCION" ${pedido.estado == 'Procesando Devolucion' ? 'selected' : ''}>PROCESANDO_DEVOLUCION</option>
+                                                            <option value="DEVOLUCION_FINALIZADA" ${pedido.estado == 'DEVOLUCION_FINALIZADA' ? 'selected' : ''}>DEVOLUCION_FINALIZADA</option>
                                                             <option value="FINALIZADO" ${pedido.estado == 'FINALIZADO' ? 'selected' : ''}>FINALIZADO</option>
                                                         </select>
                                                         <button type="submit" class="btn btn-sm btn-primary ms-2">

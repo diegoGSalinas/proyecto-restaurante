@@ -22,7 +22,7 @@ public class PedidoDao {
     PreparedStatement ps;
     ResultSet rs;
 
-      public int insertarPedido(Pedido pedido) {
+    public int insertarPedido(Pedido pedido) {
         int idGenerado = 0;
         String sql = "INSERT INTO pedido (total, id_cliente,metodo_pago,nombre_pago,direccion_pago,telefono_pago,estado) VALUES (?, ?,?,?,?,?,?)";
 
@@ -98,9 +98,9 @@ public class PedidoDao {
     }
     public List<Pedido> listarPedidos() {
         List<Pedido> listaPedidos = new ArrayList<>();
-        String sql = "SELECT p.*, c.nombre as nombre FROM pedido p " +
-                    "INNER JOIN cliente c ON p.id_cliente = c.id_cliente " +
-                    "ORDER BY FIELD(p.estado, 'PENDIENTE', 'EN_CAMINO', 'PROCESANDO_DEVOLUCIO', 'DEVOLUCION_FINALIZAD', 'FINALIZADO') ASC, p.id_pedido DESC";
+        String sql = "SELECT p.*, c.nombre as nombre, d.motivo FROM pedido p " +
+                    "INNER JOIN cliente c ON p.id_cliente = c.id_cliente left join devoluciones d on d.id_pedido = p.id_pedido " +
+                    "ORDER BY FIELD(p.estado, 'PENDIENTE', 'EN_CAMINO', 'Procesando Devolucion', 'DEVOLUCION_FINALIZADA', 'FINALIZADO') ASC, p.id_pedido DESC";
 
         try {
             con = conexion.Iniciar_Conexion();
@@ -117,6 +117,7 @@ public class PedidoDao {
                 pedido.setDireccion_pago(rs.getString("direccion_pago"));
                 pedido.setTelefono_pago(rs.getString("telefono_pago"));
                 pedido.setEstado(rs.getString("estado"));
+                pedido.setMotivo(rs.getString("motivo"));
                 listaPedidos.add(pedido);
             }
 

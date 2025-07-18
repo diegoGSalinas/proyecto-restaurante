@@ -18,25 +18,19 @@ public class Pedido {
     private String direccion_pago;
     private String telefono_pago;
     private String estado;
-
+    private String motivo;
+     
     // Constructor vacío
     public Pedido() {
     }
 
-    // Constructor básico (mantenemos el existente)
-    public Pedido(double total, int id_cliente) {
-        this.total = total;
-        this.id_cliente = id_cliente;
-        this.metodo_pago = "Efectivo"; // valor por defecto
-        this.estado = "Pendiente"; // estado por defecto
-    }
-
     // Constructor completo
-    public Pedido(double total, int id_cliente, String metodo_pago, String nombre_pago, String direccion_pago, String telefono_pago, String estado) {
+    public Pedido(double total, int id_cliente, String metodo_pago, String nombre_pago, String direccion_pago, String telefono_pago,String estado) {
+        
         this.total = total;
         this.id_cliente = id_cliente;
-        this.metodo_pago = metodo_pago;
-        this.nombre_pago = nombre_pago;
+        this.metodo_pago =metodo_pago;
+        this.nombre_pago =nombre_pago;
         this.direccion_pago = direccion_pago;
         this.telefono_pago = telefono_pago;
         this.estado = estado;
@@ -66,7 +60,6 @@ public class Pedido {
     public void setId_cliente(int id_cliente) {
         this.id_cliente = id_cliente;
     }
-
     public String getMetodo_pago() {
         return metodo_pago;
     }
@@ -106,4 +99,13 @@ public class Pedido {
     public void setEstado(String estado) {
         this.estado = estado;
     }
+    public String getMotivo()
+    {
+        return this.motivo;
+    }
+    public void setMotivo(String motivo)
+    {
+        this.motivo = motivo;
+    }
+    
 }
