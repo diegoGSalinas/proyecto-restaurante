@@ -107,33 +107,38 @@
         <%@ include file="footer.jsp" %>
            <script>
             document.addEventListener('DOMContentLoaded', function () {
-                const buttons = document.querySelectorAll('.ordenar-btn');
-               
-                buttons.forEach(btn => {
-                    btn.addEventListener('click', function () {
-                        
-                        const id_ = this.getAttribute('data-id');
-                        const accion = 'agregar';    
-                        $.post('CarritoController?accion=agregar', {
-                                id: id_
-			}, function(responseText) { 
-                            var nuevaCantidad = responseText;
-                            alert("Producto Agregado");
-                           
-                             const cartCount = document.getElementById("cart-count");
-                            if (cartCount) {
-                                cartCount.textContent = nuevaCantidad;
+    const buttons = document.querySelectorAll('.ordenar-btn');
 
-                                // Si estaba oculto, mostrarlo
-                                if (cartCount.classList.contains("d-none")) {
-                                    cartCount.classList.remove("d-none");
-                                }
-                            }
-			});
-                        
-                    });
-                });
+    buttons.forEach(btn => {
+        btn.addEventListener('click', function () {
+
+            const id_ = this.getAttribute('data-id');
+
+            $.ajax({
+                url: '/Proyecto1/api/generic/agregar',
+                type: 'POST',
+                data: JSON.stringify({ id: id_ }), // Enviar JSON
+                contentType: 'application/json',    // Indicar JSON
+                success: function (responseText) {
+                    var nuevaCantidad = responseText;
+                    alert("Producto Agregado");
+
+                    const cartCount = document.getElementById("cart-count");
+                    if (cartCount) {
+                        cartCount.textContent = nuevaCantidad;
+
+                        if (cartCount.classList.contains("d-none")) {
+                            cartCount.classList.remove("d-none");
+                        }
+                    }
+                },
+                error: function () {
+                    alert("Error al agregar producto");
+                }
             });
+        });
+    });
+});
         </script>
     </body>
 

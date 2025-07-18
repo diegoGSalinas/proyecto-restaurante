@@ -13,7 +13,7 @@
         <link rel="stylesheet" href="${pageContext.request.contextPath}/CSS/agregarProducto.css" />
     </head>
     <body>
-        <jsp:include page="header.jsp"/>
+        <jsp:include page="headeradmin.jsp"/>
 
         <div class="container">
             <div class="form-container">

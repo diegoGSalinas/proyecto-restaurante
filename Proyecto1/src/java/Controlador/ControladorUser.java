@@ -45,13 +45,19 @@ public class ControladorUser extends HttpServlet{
             Usuario u = dao.validar(username, clave);
 
              if (u != null) {
-                 int id_user = u.getId_usuario();
-                 ClienteDao cidao = new ClienteDao();
-                 Cliente ci = cidao.buscar_por_id_user(id_user);
-                 
-                 request.getSession().setAttribute("cliente", ci);
-                 System.out.println(ci.getApellidos());
-                response.sendRedirect("controladorPrincipal"); // página principal
+                 int prioridad = u.getPrioridad();
+                 if(prioridad == 1){
+                     response.sendRedirect("ControladorEstadisticas");
+                 }else{
+                    int id_user = u.getId_usuario();
+                    ClienteDao cidao = new ClienteDao();
+                    Cliente ci = cidao.buscar_por_id_user(id_user);
+
+                    request.getSession().setAttribute("cliente", ci);
+                    System.out.println(ci.getApellidos());
+                   response.sendRedirect("controladorPrincipal"); // página principal
+                 }
+                
             } else {
                 request.setAttribute("error", "Credenciales inválidas");
                 request.getRequestDispatcher("JSP/login.jsp").forward(request, response);
