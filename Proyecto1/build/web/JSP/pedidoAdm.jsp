@@ -13,7 +13,7 @@
         <link rel="stylesheet" href="${pageContext.request.contextPath}/CSS/productosAdm.css" />
     </head>
     <body>
-        <jsp:include page="headeradmin.jsp"/>
+        <jsp:include page="header.jsp"/>
 
         <div class="container-fluid">
             <div class="row">
@@ -22,17 +22,12 @@
                         <h3>Panel de Administración</h3>
                         <ul class="nav-menu">
                             <li>
-                                <a href="${pageContext.request.contextPath}/ControladorEstadisticas" >
-                                    <i class="fas fa-chart-bar"></i> Dashboard
-                                </a>
-                            </li>
-                            <li>
-                                <a href="${pageContext.request.contextPath}/ControladorProductoAdm" >
+                                <a href="${pageContext.request.contextPath}/ControladorProductoAdm">
                                     <i class="fas fa-box"></i> Productos
                                 </a>
                             </li>
                             <li>
-                                <a href="${pageContext.request.contextPath}/ControladorMarca" >
+                                <a href="${pageContext.request.contextPath}/ControladorMarca?accion=listar">
                                     <i class="fas fa-tags"></i> Marcas
                                 </a>
                             </li>

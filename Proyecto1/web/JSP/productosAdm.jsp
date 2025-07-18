@@ -24,7 +24,7 @@
         <link rel="stylesheet" href="${pageContext.request.contextPath}/CSS/productosAdm.css" />
     </head>
     <body>
-        <jsp:include page="header.jsp"/>
+        <jsp:include page="headeradmin.jsp"/>
 
         <div class="main-container">
             <!-- Menú lateral -->
@@ -32,24 +32,23 @@
                 <h3>Panel de Administración</h3>
                 <ul class="nav-menu">
                     <li>
-                        <a href="${pageContext.request.contextPath}/ControladorProductoAdm" 
-                           class="active">
+                        <a href="${pageContext.request.contextPath}/ControladorEstadisticas" >
+                            <i class="fas fa-chart-bar"></i> Dashboard
+                        </a>
+                    </li>
+                    <li>
+                        <a href="${pageContext.request.contextPath}/ControladorProductoAdm" class="active">
                             <i class="fas fa-box"></i> Productos
                         </a>
                     </li>
                     <li>
-                        <a href="${pageContext.request.contextPath}/ControladorMarca?accion=listar">
+                        <a href="${pageContext.request.contextPath}/ControladorMarca">
                             <i class="fas fa-tags"></i> Marcas
                         </a>
                     </li>
                     <li>
-                        <a href="${pageContext.request.contextPath}/ControladorOrden">
-                            <i class="fas fa-shopping-cart"></i> Órdenes
-                        </a>
-                    </li>
-                    <li>
-                        <a href="${pageContext.request.contextPath}/ControladorEstadisticas">
-                            <i class="fas fa-shopping-cart"></i> Estadisticas
+                        <a href="${pageContext.request.contextPath}/ControladorPedido">
+                            <i class="fas fa-shopping-cart"></i> Pedidos
                         </a>
                     </li>
                 </ul>

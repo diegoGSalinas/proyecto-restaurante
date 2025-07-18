@@ -14,7 +14,7 @@
 
     </head>
     <body>
-        <jsp:include page="header.jsp"/>
+        <jsp:include page="headeradmin.jsp"/>
 
 
 
@@ -25,18 +25,23 @@
                         <h3>Panel de Administración</h3>
                         <ul class="nav-menu">
                             <li>
-                                <a href="${pageContext.request.contextPath}/ControladorProductoAdm">
+                                <a href="${pageContext.request.contextPath}/ControladorEstadisticas" >
+                                    <i class="fas fa-chart-bar"></i> Dashboard
+                                </a>
+                            </li>
+                            <li>
+                                <a href="${pageContext.request.contextPath}/ControladorProductoAdm" >
                                     <i class="fas fa-box"></i> Productos
                                 </a>
                             </li>
                             <li>
-                                <a href="${pageContext.request.contextPath}/ControladorMarca?accion=listar" class="active">
+                                <a href="${pageContext.request.contextPath}/ControladorMarca" class="active">
                                     <i class="fas fa-tags"></i> Marcas
                                 </a>
                             </li>
                             <li>
-                                <a href="${pageContext.request.contextPath}/ControladorOrden">
-                                    <i class="fas fa-shopping-cart"></i> Órdenes
+                                <a href="${pageContext.request.contextPath}/ControladorPedido">
+                                    <i class="fas fa-shopping-cart"></i> Pedidos
                                 </a>
                             </li>
                         </ul>

@@ -24,12 +24,17 @@
 </head>
 <body>
     <%-- Incluir el header --%>
-    <jsp:include page="header.jsp"/>
+    <jsp:include page="headeradmin.jsp"/>
 
     <div class="main-container">
         <div class="sidebar">
             <h3>Panel de Administración</h3>
             <ul class="nav-menu">
+                <li>
+                    <a href="${pageContext.request.contextPath}/ControladorEstadisticas" class="active">
+                        <i class="fas fa-chart-bar"></i> Dashboard
+                    </a>
+                </li>
                 <li>
                     <a href="${pageContext.request.contextPath}/ControladorProductoAdm">
                         <i class="fas fa-box"></i> Productos
@@ -41,15 +46,11 @@
                     </a>
                 </li>
                 <li>
-                    <a href="${pageContext.request.contextPath}/ControladorOrden">
-                        <i class="fas fa-shopping-cart"></i> Órdenes
+                    <a href="${pageContext.request.contextPath}/ControladorPedido">
+                        <i class="fas fa-shopping-cart"></i> Pedidos
                     </a>
                 </li>
-                <li>
-                    <a href="${pageContext.request.contextPath}/ControladorEstadisticas" class="active">
-                        <i class="fas fa-chart-bar"></i> Estadísticas
-                    </a>
-                </li>
+                
             </ul>
         </div>
 
@@ -72,7 +73,7 @@
                 <% } %>
 
                 <div class="contenedor-principal-estadisticas">
-                    <h1 class="titulo-principal-estadisticas">Estadísticas de Pedidos</h1>
+                    <h1 class="titulo-principal-estadisticas">Dashboard</h1>
 
                     <div class="seccion-estadistica" id="indiceEstadisticas">
                         <h2 class="subtitulo-seccion">Índice de Estadísticas</h2>
